@@ -19,7 +19,7 @@ export const TopBar: React.FC<Props> = ({ className, categories }): JSX.Element 
 		>
 			<Container className="flex items-center justify-between">
 				{/* categories */}
-				<Categories categories={categories} />
+				<Categories items={categories} />
 
 				{/* sort popup */}
 			</Container>
