@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google";
 import { SEO_CONFIG } from "@/constants/seo";
 import { Metadata } from "next";
 
+import StoreProvider from "@/store/StoreProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,7 +27,9 @@ export default function RootLayout({
 	return (
 		<html lang="it-IT" suppressHydrationWarning data-scroll-behavior="smooth">
 			<head></head>
-			<body className={nunito.className}>{children}</body>
+			<body className={nunito.className}>
+				<StoreProvider>{children}</StoreProvider>
+			</body>
 		</html>
 	);
 }
