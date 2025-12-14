@@ -23,10 +23,10 @@ export default async function Home() {
 	console.log(initialData);
 
 	return (
-		<Container className="py-8">
+		<>
 			<TopBar categories={initialData.category} />
-
-			{/* <div className="space-y-8">
+			<Container className="py-8">
+				{/* <div className="space-y-8">
 				{initialData.category.map((category) => (
 					<div key={category.id}>
 						<h2 className="text-2xl font-semibold mb-4">{category.name}</h2>
@@ -45,6 +45,8 @@ export default async function Home() {
 					</div>
 				))}
 			</div> */}
-		</Container>
+				<section className="h-[500vh]"></section>
+			</Container>
+		</>
 	);
 }
