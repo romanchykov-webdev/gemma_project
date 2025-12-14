@@ -5,7 +5,8 @@
 
 /*для плавного скролла*/
 html {
-	scroll-behavior: smooth;
+	/* scroll-behavior: smooth;*/
+	scrollbar-width: none;
 }
 
 @theme inline {
@@ -175,4 +176,15 @@ html {
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
 	background: theme("colors.neutral.light");
+}
+
+/* Скрытие скроллбара с сохранением функциональности скролла */
+.scrollbar-hidden {
+	/* Для WebKit браузеров (Chrome, Safari, Edge) */
+	-ms-overflow-style: none; /* IE и Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera */
 }
