@@ -23,7 +23,7 @@ export const ProductsGroup: React.FC<Props> = ({
 
 	const intersectionRef = useRef<HTMLDivElement>(null);
 
-	console.log(items);
+	// console.log(items);
 	//
 	return (
 		<div className={className} id={title} ref={intersectionRef} style={{ scrollMarginTop: "120px" }}>

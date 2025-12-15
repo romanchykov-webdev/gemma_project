@@ -20,7 +20,7 @@ export default async function Home() {
 		);
 	}
 
-	console.log(initialData);
+	// console.log(initialData);
 
 	return (
 		<>

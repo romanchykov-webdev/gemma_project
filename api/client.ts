@@ -8,6 +8,7 @@ export async function fetchHomeData(): Promise<HomeApiResponse> {
 		headers: {
 			"Content-Type": "application/json",
 		},
+		next: { revalidate: 3600 }, // Добавил для  кэширование на 1 час ????
 	});
 
 	if (!response.ok) {
