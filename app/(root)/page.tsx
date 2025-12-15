@@ -1,5 +1,5 @@
 import { fetchHomeData } from "@/api/client";
-import { Container, TopBar } from "@/components/shared";
+import { Container, ProductsGroup, TopBar } from "@/components/shared";
 
 export default async function Home() {
 	let initialData = null;
@@ -23,28 +23,39 @@ export default async function Home() {
 	console.log(initialData);
 
 	return (
-		<Container className="py-8">
+		<>
 			<TopBar categories={initialData.category} />
+			<Container className="py-8">
+				{/* Список товаров */}
+				<div className="flex-1">
+					<div className="flex flex-col gap-16">
+						{(() => {
+							// ✅ Вычисляем индекс первой категории с продуктами ОДИН РАЗ (вне map)
+							const firstCategoryWithProductsIndex = initialData.category.findIndex(
+								(cat) => cat.products.length > 0
+							);
 
-			{/* <div className="space-y-8">
-				{initialData.category.map((category) => (
-					<div key={category.id}>
-						<h2 className="text-2xl font-semibold mb-4">{category.name}</h2>
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-							{category.products.map((product) => (
-								<div key={product.id} className="border rounded-lg p-4">
-									<img
-										src={product.image}
-										alt={product.name}
-										className="w-full h-48 object-cover rounded mb-2"
-									/>
-									<h3 className="font-medium">{product.name}</h3>
-								</div>
-							))}
-						</div>
+							return initialData.category.map((category, categoryIndex) => {
+								const isFirstCategory = categoryIndex === firstCategoryWithProductsIndex;
+
+								return (
+									category.products.length > 0 && (
+										<article id={`category-${category.id}`} key={category.id}>
+											<ProductsGroup
+												categoryId={category.id}
+												title={category.name}
+												items={category.products}
+												isFirstCategory={isFirstCategory}
+											/>
+										</article>
+									)
+								);
+							});
+						})()}
 					</div>
-				))}
-			</div> */}
-		</Container>
+				</div>
+				<section className="h-[500vh]"></section>
+			</Container>
+		</>
 	);
 }

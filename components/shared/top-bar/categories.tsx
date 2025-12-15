@@ -1,24 +1,62 @@
 import { Category } from "@/lib/types/api";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import React, { JSX } from "react";
 
 interface Props {
 	className?: string;
 	items: Category[];
+	activeId: number;
+	setActiveId: (activeId: number) => void;
 }
 
-export const Categories: React.FC<Props> = ({ className, items }): JSX.Element => {
-	console.log(items);
+export const Categories: React.FC<Props> = ({ className, items, activeId, setActiveId }): JSX.Element => {
+	// console.log(items);
+
+	// const handleCategory = (e: React.MouseEvent<HTMLAnchorElement>, categoryId: number) => {
+	// 	e.preventDefault();
+	// 	setActiveId(categoryId);
+	// };
+
+	const handleCategory = (e: React.MouseEvent<HTMLAnchorElement>, categoryId: number, categoryName: string) => {
+		e.preventDefault();
+		setActiveId(categoryId);
+
+		// Программный скролл к элементу с учетом sticky header
+		const targetId = categoryName;
+		const targetElement = document.getElementById(targetId);
+
+		if (targetElement) {
+			const headerOffset = 120; // Высота sticky TopBar + отступы
+			const elementPosition = targetElement.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth",
+			});
+		}
+	};
 
 	return (
-		<div className={cn("", className)}>
-			{" "}
-			{items.map((item) => (
-				<div key={item.id}>
-					<Link href={`/category/${item.id}`}>{item.name}</Link>
-				</div>
-			))}{" "}
+		<div
+			className={cn(
+				"flex gap-2 bg-gray-50 p-2 rounded-2xl overflow-x-auto scrollbar-hidden flex-nowrap",
+				className
+			)}
+		>
+			{items.map((category) => (
+				<a
+					className={cn(
+						"flex items-center font-bold h-11 rounded-2xl px-5 md:text-sm hover:text-brand-primary",
+						activeId === category.id && "bg-white shadow-md shadow-gray-200 text-brand-primary"
+					)}
+					key={category.id}
+					href={`#${category.name}`}
+					onClick={(e) => handleCategory(e, category.id, category.name)}
+				>
+					{category.name}
+				</a>
+			))}
 		</div>
 	);
 };
