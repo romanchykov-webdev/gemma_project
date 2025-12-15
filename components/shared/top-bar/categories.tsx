@@ -12,9 +12,29 @@ interface Props {
 export const Categories: React.FC<Props> = ({ className, items, activeId, setActiveId }): JSX.Element => {
 	// console.log(items);
 
-	const handleCategory = (e: React.MouseEvent<HTMLAnchorElement>, categoryId: number) => {
+	// const handleCategory = (e: React.MouseEvent<HTMLAnchorElement>, categoryId: number) => {
+	// 	e.preventDefault();
+	// 	setActiveId(categoryId);
+	// };
+
+	const handleCategory = (e: React.MouseEvent<HTMLAnchorElement>, categoryId: number, categoryName: string) => {
 		e.preventDefault();
 		setActiveId(categoryId);
+
+		// Программный скролл к элементу с учетом sticky header
+		const targetId = categoryName;
+		const targetElement = document.getElementById(targetId);
+
+		if (targetElement) {
+			const headerOffset = 120; // Высота sticky TopBar + отступы
+			const elementPosition = targetElement.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth",
+			});
+		}
 	};
 
 	return (
@@ -32,7 +52,7 @@ export const Categories: React.FC<Props> = ({ className, items, activeId, setAct
 					)}
 					key={category.id}
 					href={`#${category.name}`}
-					onClick={(e) => handleCategory(e, category.id)}
+					onClick={(e) => handleCategory(e, category.id, category.name)}
 				>
 					{category.name}
 				</a>
