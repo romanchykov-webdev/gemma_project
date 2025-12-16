@@ -2,6 +2,8 @@ export interface Product {
 	id: number;
 	image: string;
 	name: string;
+	ingredients: string[];
+	price: number;
 	createa_at: string;
 	updated_at: string;
 	category: string;

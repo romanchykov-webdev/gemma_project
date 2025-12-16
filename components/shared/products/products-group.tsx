@@ -26,15 +26,27 @@ export const ProductsGroup: React.FC<Props> = ({
 	// console.log(items);
 	//
 	return (
-		<div className={className} id={title} ref={intersectionRef} style={{ scrollMarginTop: "120px" }}>
-			<h2 className="text-2xl font-semibold mb-5">{title}</h2>
+		<div
+			className={cn("flex flex-col gap-5", className)}
+			id={title}
+			ref={intersectionRef}
+			style={{ scrollMarginTop: "120px" }}
+		>
+			<h2 className="text-2xl font-bold mb-5">{title}</h2>
 
 			{/* products list */}
 			<div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4")}>
 				{items.map((product) => {
 					// const minPriceItem = product.items.reduce((min, item) => (item.price < min.price ? item : min));
 					return (
-						<CardItem key={product.id} name={product.name} productId={product.id} image={product.image} />
+						<CardItem
+							key={product.id}
+							name={product.name}
+							productId={product.id}
+							image={product.image}
+							ingredients={product.ingredients}
+							price={product.price}
+						/>
 					);
 				})}
 			</div>

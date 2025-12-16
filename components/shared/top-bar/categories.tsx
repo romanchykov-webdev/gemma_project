@@ -26,7 +26,7 @@ export const Categories: React.FC<Props> = ({ className, items, activeId, setAct
 		const targetElement = document.getElementById(targetId);
 
 		if (targetElement) {
-			const headerOffset = 120; // Высота sticky TopBar + отступы
+			const headerOffset = 190; // Высота sticky TopBar + отступы
 			const elementPosition = targetElement.getBoundingClientRect().top;
 			const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
